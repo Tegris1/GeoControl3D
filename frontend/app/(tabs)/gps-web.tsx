@@ -1,5 +1,5 @@
 import { ThemedView } from "@/components/themed-view";
-import TopconGPSReaderWeb from "@/components/topcon-gps-reader-web";
+import TopconGPSReaderWeb from "@/pages/topcon-gps-reader-web";
 import { StyleSheet } from "react-native";
 
 export default function GPSWebScreen() {
