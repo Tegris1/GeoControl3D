@@ -1,14 +1,14 @@
 import React, { useMemo } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text } from "react-native";
 import {
   BluetoothSection,
   DataDisplaySections,
   NtripConfigSection,
   ReceiverInitSection,
   RtkPipelineSection,
-} from "./gps-reader";
-import { formatGpsSummary } from "../utils/gps-reader-formatters";
-import { useTopconGpsReader } from "../hooks/use-topcon-gps-reader";
+} from "@/components/gps-reader";
+import { formatGpsSummary } from "@/utils/gps-reader-formatters";
+import { useTopconGpsReader } from "@/hooks/use-topcon-gps-reader";
 import { styles } from "./topcon-gps-reader.styles";
 
 

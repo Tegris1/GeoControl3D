@@ -17,6 +17,7 @@ expo-env.d.ts
 *.p12
 *.key
 *.mobileprovision
+android/
 
 # Metro
 .metro-health-check*
@@ -25,6 +26,8 @@ expo-env.d.ts
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+expo-dev.log
+expo-dev.err.log
 
 # macOS
 .DS_Store
@@ -40,7 +43,12 @@ app-example
 
 # generated native folders
 /ios
-/android
+
+# Android native project is part of the app because we use custom native code.
+/android/.gradle
+/android/build
+/android/app/build
+/android/local.properties
 
 #ide
 .vscode/
