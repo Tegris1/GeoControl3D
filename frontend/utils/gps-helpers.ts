@@ -61,12 +61,14 @@ export function convertNMEACoordinate(
 export function parseGGA(sentence: string): GGAData | null {
   try {
     const line = sentence.trim();
+    const ggaStart = line.search(/\$..GGA,/);
 
-    if (!line.startsWith("$GPGGA") && !line.startsWith("$GNGGA")) {
+    if (ggaStart < 0) {
       return null;
     }
 
-    const parts = line.split(",");
+    const normalized = line.slice(ggaStart);
+    const parts = normalized.split(",");
 
     if (parts.length < 10) {
       return null;
@@ -77,7 +79,7 @@ export function parseGGA(sentence: string): GGAData | null {
     const longitude = convertNMEACoordinate(parts[4], parts[5] as "E" | "W");
 
     return {
-      raw: sentence,
+      raw: normalized,
       type: "GGA",
       time: parts[1],
       latitude,
@@ -137,6 +139,23 @@ export function formatPosition(position: Position): string {
  */
 export function isValidFix(ggaData: GGAData): boolean {
   return ggaData.fixQuality > 0 && ggaData.numSatellites >= 4;
+}
+
+export function getFixQualityLabel(fixQuality: number): string {
+  switch (fixQuality) {
+    case 0:
+      return "No fix";
+    case 1:
+      return "Autonomous GPS";
+    case 2:
+      return "DGPS";
+    case 4:
+      return "RTK Fixed";
+    case 5:
+      return "RTK Float";
+    default:
+      return `Fix ${fixQuality}`;
+  }
 }
 
 /**
